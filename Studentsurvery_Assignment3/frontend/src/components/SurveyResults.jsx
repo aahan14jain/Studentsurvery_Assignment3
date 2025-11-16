@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 export default function SurveyResults() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function SurveyResults() {
     try {
       setLoading(true);
       setError("");
-      const response = await fetch("http://127.0.0.1:8000/surveys");
+      const response = await fetch(`${API_URL}/surveys`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -32,7 +33,7 @@ export default function SurveyResults() {
     if (!window.confirm(`Are you sure you want to delete survey #${id}?`)) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/survey/${id}`, {
+      const response = await fetch(`${API_URL}/survey/${id}`, {
         method: "DELETE",
       });
 

@@ -1,4 +1,5 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
+import { API_URL } from "../config";
 
 interface FormData {
   first_name: string;
@@ -41,7 +42,7 @@ export default function SurveyForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await fetch("http://127.0.0.1:8000/survey", {
+    const response = await fetch(`${API_URL}/survey`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)

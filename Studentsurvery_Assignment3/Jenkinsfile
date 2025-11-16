@@ -29,6 +29,7 @@ pipeline {
             steps {
                 sh '''
                 cd frontend
+                # Frontend will use /api which nginx will proxy to backend service
                 docker build -t $FRONTEND_IMAGE:latest .
                 '''
             }

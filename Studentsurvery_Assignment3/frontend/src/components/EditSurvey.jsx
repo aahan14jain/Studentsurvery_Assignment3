@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 export default function EditSurvey() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export default function EditSurvey() {
   useEffect(() => {
     const fetchSurvey = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/survey/${id}`);
+        const response = await fetch(`${API_URL}/survey/${id}`);
         if (response.ok) {
           const data = await response.json();
           setFormData(data);
@@ -55,7 +56,7 @@ export default function EditSurvey() {
     e.preventDefault();
 
     try {
-        const response = await fetch(`http://127.0.0.1:8000/survey/${id}`, {
+        const response = await fetch(`${API_URL}/survey/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
