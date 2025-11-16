@@ -22,7 +22,7 @@ function App() {
         }}
       >
         <Link to="/" style={{ textDecoration: "none" }}>📝 Survey Form</Link>
-        <Link to="/results" style={{ textDecoration: "none" }}>📄 View Results</Link>
+        <Link to="/results" style={{ textDecoration: "none" }}>📄 View Form Results</Link>
       </nav>
 
       <Routes>
