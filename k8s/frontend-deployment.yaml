@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: survey-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: survey-frontend
+  template:
+    metadata:
+      labels:
+        app: survey-frontend
+    spec:
+      containers:
+        - name: survey-frontend
+          image: aahanjain1411/survey-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
