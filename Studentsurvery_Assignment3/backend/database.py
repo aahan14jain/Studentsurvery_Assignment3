@@ -1,6 +1,9 @@
 from sqlmodel import SQLModel, create_engine
+import os
 
-DATABASE_URL = "sqlite:///./surveys.db"
+# Use absolute path for database file
+DB_PATH = os.path.join(os.path.dirname(__file__), "surveys.db")
+DATABASE_URL = f"sqlite:///{DB_PATH}"
 
 engine = create_engine(DATABASE_URL, echo=True)
 
