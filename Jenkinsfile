@@ -6,6 +6,7 @@ pipeline {
         DOCKER_USERNAME = 'aahanjain1411'
         BACKEND_IMAGE = 'aahanjain1411/survey-backend'
         FRONTEND_IMAGE = 'aahanjain1411/survey-frontend'
+        PATH = "${env.PATH}:/Users/aahanjain/.rd/bin"
     }
 
     stages {
