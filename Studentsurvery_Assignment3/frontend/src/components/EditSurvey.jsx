@@ -1,3 +1,21 @@
+/**
+ * Edit Survey Component
+ * =====================
+ * This component provides a form to edit an existing survey submission.
+ * It loads the survey data by ID from the URL parameters, populates the form,
+ * and allows users to update the survey information.
+ * 
+ * Features:
+ * - Loads existing survey data on component mount
+ * - Pre-populates form fields with current values
+ * - Updates survey via PUT request to the backend API
+ * - Handles loading and error states
+ * - Navigates back to results page after successful update
+ * 
+ * The component uses React Router's useParams to get the survey ID from the URL
+ * and useNavigate for programmatic navigation.
+ */
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../config";

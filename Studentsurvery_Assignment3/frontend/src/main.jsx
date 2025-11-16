@@ -1,3 +1,14 @@
+/**
+ * Main Entry Point for React Application
+ * =======================================
+ * This is the entry point of the React frontend application.
+ * It renders the root App component wrapped in BrowserRouter for client-side routing,
+ * and mounts the application to the DOM element with id "root".
+ * 
+ * The application uses React Router for navigation between different pages
+ * (Survey Form, Results, Edit Survey).
+ */
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";

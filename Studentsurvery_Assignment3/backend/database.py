@@ -1,3 +1,14 @@
+"""
+Database Configuration and Initialization
+==========================================
+This module handles database connection and initialization for the survey application.
+It sets up a SQLite database using SQLModel and provides a function to initialize
+the database schema (create tables) on application startup.
+
+The database file is stored in the same directory as this module using an absolute path
+to ensure proper file location in both development and Docker environments.
+"""
+
 from sqlmodel import SQLModel, create_engine
 import os
 

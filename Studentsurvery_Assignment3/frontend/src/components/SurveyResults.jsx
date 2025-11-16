@@ -1,3 +1,22 @@
+/**
+ * Survey Results Component
+ * ========================
+ * This component displays all submitted surveys in a table format.
+ * It fetches survey data from the backend API and provides functionality to:
+ * - View all survey submissions in a table
+ * - Edit a survey (navigates to edit page)
+ * - Delete a survey (with confirmation dialog)
+ * 
+ * Features:
+ * - Loading state while fetching data
+ * - Error handling and display
+ * - Responsive table layout
+ * - Navigation to edit page for each survey
+ * 
+ * The component automatically fetches surveys when mounted and refreshes
+ * after delete operations.
+ */
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../config";

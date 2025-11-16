@@ -1,3 +1,20 @@
+"""
+Student Survey Backend API
+==========================
+This module implements a FastAPI REST API for managing student survey submissions.
+It provides endpoints for creating, reading, updating, and deleting survey records.
+
+Features:
+- POST /survey - Create a new survey submission
+- GET /surveys - Retrieve all survey submissions
+- GET /survey/{id} - Retrieve a specific survey by ID
+- PUT /survey/{id} - Update an existing survey
+- DELETE /survey/{id} - Delete a survey
+
+The API uses SQLModel for database operations and includes CORS middleware
+to allow cross-origin requests from the frontend application.
+"""
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session, select

@@ -1,3 +1,19 @@
+/**
+ * Survey Form Component
+ * =====================
+ * This component renders a form for students to submit survey responses.
+ * It collects personal information (name, address, contact details) and
+ * survey responses about campus preferences, interest sources, and recommendations.
+ * 
+ * Features:
+ * - Form validation for required fields
+ * - Dropdown selections for survey questions
+ * - Submits data to the backend API via POST request
+ * - Displays success message upon submission
+ * 
+ * The form uses TypeScript for type safety and React hooks for state management.
+ */
+
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { API_URL } from "../config";
 

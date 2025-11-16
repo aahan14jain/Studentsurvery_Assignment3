@@ -1,3 +1,17 @@
+/**
+ * Main App Component
+ * ==================
+ * This is the root component of the React application that sets up routing
+ * and navigation. It provides a navigation bar with links to the survey form
+ * and results page, and defines routes for:
+ * - "/" - Survey Form page
+ * - "/results" - View all survey results
+ * - "/edit/:id" - Edit a specific survey by ID
+ * 
+ * The component uses React Router for client-side navigation and provides
+ * a consistent layout and styling across all pages.
+ */
+
 import { Routes, Route, Link } from "react-router-dom";
 import SurveyForm from "./components/SurveyForm";
 import SurveyResults from "./components/SurveyResults";
