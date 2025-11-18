@@ -18,3 +18,8 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
+          env:
+            - name: BACKEND_HOST
+              value: "survey-backend-service"
+            - name: BACKEND_PORT
+              value: "8000"

@@ -164,9 +164,11 @@ docker run -p 8000:8000 survey-backend:latest
 **Frontend:**
 ```bash
 cd Studentsurvery_Assignment3/frontend
-docker build -t survey-frontend:latest -f Dockerfile .
+docker build -t survey-frontend:latest .
 docker run -p 80:80 survey-frontend:latest
 ```
+
+**Note**: The frontend Dockerfile is configured to use `/api` as the API URL by default. Nginx will proxy `/api/` requests to the backend service. For local development, the frontend uses `http://127.0.0.1:8000` when running on port 5174.
 
 ### Kubernetes Deployment
 
@@ -199,11 +201,27 @@ kubectl get svc
    - Backend: `http://localhost:30001`
    - API Docs: `http://localhost:30001/docs`
 
+**Note**: The frontend is configured to use `/api` as the API URL in production builds. Nginx proxies `/api/` requests to the backend service automatically.
+
 #### Update deployments:
 ```bash
 kubectl rollout restart deployment/survey-backend
 kubectl rollout restart deployment/survey-frontend
 ```
+
+#### Troubleshooting
+
+**If the form submission fails in Kubernetes:**
+1. Clear your browser cache or do a hard refresh (`Ctrl+Shift+R` or `Cmd+Shift+R`)
+2. Check the browser console for the API URL configuration
+3. Verify pods are running: `kubectl get pods`
+4. Check pod logs: `kubectl logs <pod-name>`
+5. Verify services: `kubectl get svc`
+
+**Browser Cache Issues:**
+- The frontend JavaScript bundle is cached by browsers
+- After deploying a new version, always do a hard refresh
+- Or use an incognito/private window to test
 
 ## 📁 Project Structure
 
@@ -219,7 +237,7 @@ Studentsurvery_Assignment3/
 │   ├── src/
 │   │   ├── main.jsx         # React entry point
 │   │   ├── App.jsx          # Main app component with routing
-│   │   ├── config.js        # API configuration
+│   │   ├── config.js        # API URL configuration (uses /api in production)
 │   │   └── components/
 │   │       ├── SurveyForm.tsx      # Survey submission form
 │   │       ├── SurveyResults.jsx   # Display all surveys

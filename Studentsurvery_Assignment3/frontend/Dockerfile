@@ -1,8 +1,9 @@
 # Step 1: Build the frontend
 FROM node:20 AS build
 
-# Set build argument for API URL (defaults to localhost for local builds)
-ARG VITE_API_URL=http://127.0.0.1:8000
+# Set build argument for API URL - always use /api for production (Docker/Kubernetes)
+# nginx will proxy /api/ requests to the backend service
+ARG VITE_API_URL=/api
 ENV VITE_API_URL=$VITE_API_URL
 
 WORKDIR /app

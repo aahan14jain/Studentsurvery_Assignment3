@@ -30,9 +30,11 @@ from models import Survey
 app = FastAPI()
 
 # Configure CORS
+# Allow all origins for Kubernetes deployment
+# In production, you may want to restrict this to specific domains
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5174", "http://127.0.0.1:5174"],
+    allow_origins=["*"],  # Allow all origins for Kubernetes
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

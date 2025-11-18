@@ -67,8 +67,13 @@ export default function SurveyForm() {
     setIsSubmitting(true);
     setSubmitMessage(null);
 
+    const requestUrl = `${API_URL}/survey`;
+    console.log('Submitting survey to:', requestUrl);
+    console.log('API_URL:', API_URL);
+    console.log('Form data:', formData);
+
     try {
-      const response = await fetch(`${API_URL}/survey`, {
+      const response = await fetch(requestUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

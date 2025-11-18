@@ -16,11 +16,29 @@
  */
 
 // API configuration
-// In Kubernetes, nginx will proxy /api/ requests to the backend service
-// For local development, it defaults to localhost
-// When running in Kubernetes, use /api as the base URL (nginx will proxy it)
-export const API_URL = import.meta.env.VITE_API_URL || 
-  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-    ? 'http://127.0.0.1:8000' 
-    : '/api');
+// Simple and reliable: Use /api for all production builds (Docker/Kubernetes)
+// Only use direct backend URL for local Vite dev server (port 5174)
+const getApiUrl = () => {
+  // If explicitly set via environment variable, use that (highest priority)
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  
+  // For production builds (Docker/Kubernetes), always use /api
+  // nginx will proxy /api/ requests to the backend service
+  if (import.meta.env.MODE === 'production') {
+    return '/api';
+  }
+  
+  // For local development (Vite dev server on port 5174), use direct backend URL
+  const port = window.location.port;
+  if (port === '5174') {
+    return 'http://127.0.0.1:8000';
+  }
+  
+  // Default: Use /api for any other case (safer for production)
+  return '/api';
+};
+
+export const API_URL = getApiUrl();
 
