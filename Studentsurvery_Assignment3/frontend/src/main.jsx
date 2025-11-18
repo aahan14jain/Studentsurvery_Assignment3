@@ -7,6 +7,10 @@
  * 
  * The application uses React Router for navigation between different pages
  * (Survey Form, Results, Edit Survey).
+ * 
+ * Authors:
+ * Aahan Jain - G01522443
+ * Aditya Samir Vaidya - G01501989
  */
 
 import React from "react";

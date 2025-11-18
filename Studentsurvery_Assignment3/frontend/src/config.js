@@ -9,6 +9,10 @@
  * - In Kubernetes/production, it uses '/api' which is proxied by nginx to the backend service
  * 
  * This allows the same frontend code to work in both development and production environments.
+ * 
+ * Authors:
+ * Aahan Jain - G01522443
+ * Aditya Samir Vaidya - G01501989
  */
 
 // API configuration

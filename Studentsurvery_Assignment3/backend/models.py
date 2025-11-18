@@ -6,6 +6,10 @@ The Survey class represents a student survey submission with all required fields
 including personal information, contact details, and survey responses.
 
 The model is used both for database table creation and API request/response validation.
+
+Authors:
+Aahan Jain - G01522443
+Aditya Samir Vaidya - G01501989
 """
 
 from sqlmodel import SQLModel, Field

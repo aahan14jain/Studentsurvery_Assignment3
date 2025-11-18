@@ -12,6 +12,10 @@
  * - Displays success message upon submission
  * 
  * The form uses TypeScript for type safety and React hooks for state management.
+ * 
+ * Authors:
+ * Aahan Jain - G01522443
+ * Aditya Samir Vaidya - G01501989
  */
 
 import React, { useState, FormEvent, ChangeEvent } from "react";
@@ -48,6 +52,9 @@ export default function SurveyForm() {
     recommendation: ""
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
@@ -57,16 +64,48 @@ export default function SurveyForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage(null);
 
-    const response = await fetch(`${API_URL}/survey`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
-    });
+    try {
+      const response = await fetch(`${API_URL}/survey`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
 
-    const result = await response.json();
-    alert("Survey submitted successfully!");
-    console.log(result);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: "Failed to submit survey" }));
+        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setSubmitMessage({ type: "success", text: "Survey submitted successfully!" });
+      
+      // Reset form after successful submission
+      setFormData({
+        first_name: "",
+        last_name: "",
+        street_address: "",
+        city: "",
+        state: "",
+        zip_code: "",
+        telephone: "",
+        email: "",
+        date_of_survey: "",
+        liked_most: "",
+        interested_in: "",
+        recommendation: ""
+      });
+
+      console.log(result);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+      setSubmitMessage({ type: "error", text: `Error: ${errorMessage}` });
+      console.error("Submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -84,6 +123,23 @@ export default function SurveyForm() {
       <h2 style={{ marginBottom: "25px", textAlign: "center", color: "#333" }}>
         Student Survey Form
       </h2>
+
+      {/* Submit message */}
+      {submitMessage && (
+        <div
+          style={{
+            padding: "12px",
+            marginBottom: "20px",
+            borderRadius: "5px",
+            backgroundColor: submitMessage.type === "success" ? "#d4edda" : "#f8d7da",
+            color: submitMessage.type === "success" ? "#155724" : "#721c24",
+            border: `1px solid ${submitMessage.type === "success" ? "#c3e6cb" : "#f5c6cb"}`,
+            textAlign: "center"
+          }}
+        >
+          {submitMessage.text}
+        </div>
+      )}
 
       {/* ---- Input fields ---- */}
       <div style={{ marginBottom: "20px" }}>
@@ -328,6 +384,7 @@ export default function SurveyForm() {
           name="liked_most"
           value={formData.liked_most}
           onChange={handleChange}
+          required
           style={{
             width: "100%",
             padding: "10px",
@@ -359,6 +416,7 @@ export default function SurveyForm() {
           name="interested_in"
           value={formData.interested_in}
           onChange={handleChange}
+          required
           style={{
             width: "100%",
             padding: "10px",
@@ -388,6 +446,7 @@ export default function SurveyForm() {
           name="recommendation"
           value={formData.recommendation}
           onChange={handleChange}
+          required
           style={{
             width: "100%",
             padding: "10px",
@@ -409,20 +468,22 @@ export default function SurveyForm() {
 
       <button
         type="submit"
+        disabled={isSubmitting}
         style={{
           width: "100%",
           marginTop: "20px",
           padding: "12px",
-          background: "#007bff",
+          background: isSubmitting ? "#6c757d" : "#007bff",
           color: "white",
           border: "none",
           borderRadius: "5px",
-          cursor: "pointer",
+          cursor: isSubmitting ? "not-allowed" : "pointer",
           fontSize: "16px",
-          fontWeight: "500"
+          fontWeight: "500",
+          opacity: isSubmitting ? 0.7 : 1
         }}
       >
-        Submit Survey
+        {isSubmitting ? "Submitting..." : "Submit Survey"}
       </button>
     </form>
   );

@@ -14,6 +14,10 @@
  * 
  * The component uses React Router's useParams to get the survey ID from the URL
  * and useNavigate for programmatic navigation.
+ * 
+ * Authors:
+ * Aahan Jain - G01522443
+ * Aditya Samir Vaidya - G01501989
  */
 
 import { useState, useEffect } from "react";

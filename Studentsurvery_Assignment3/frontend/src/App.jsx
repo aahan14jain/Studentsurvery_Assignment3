@@ -10,6 +10,10 @@
  * 
  * The component uses React Router for client-side navigation and provides
  * a consistent layout and styling across all pages.
+ * 
+ * Authors:
+ * Aahan Jain - G01522443
+ * Aditya Samir Vaidya - G01501989
  */
 
 import { Routes, Route, Link } from "react-router-dom";

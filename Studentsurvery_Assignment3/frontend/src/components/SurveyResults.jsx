@@ -15,6 +15,10 @@
  * 
  * The component automatically fetches surveys when mounted and refreshes
  * after delete operations.
+ * 
+ * Authors:
+ * Aahan Jain - G01522443
+ * Aditya Samir Vaidya - G01501989
  */
 
 import { useEffect, useState } from "react";

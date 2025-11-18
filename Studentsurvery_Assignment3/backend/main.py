@@ -13,6 +13,10 @@ Features:
 
 The API uses SQLModel for database operations and includes CORS middleware
 to allow cross-origin requests from the frontend application.
+
+Authors:
+Aahan Jain - G01522443
+Aditya Samir Vaidya - G01501989
 """
 
 from fastapi import FastAPI, HTTPException

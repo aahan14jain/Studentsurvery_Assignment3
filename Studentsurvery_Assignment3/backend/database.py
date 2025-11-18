@@ -7,6 +7,10 @@ the database schema (create tables) on application startup.
 
 The database file is stored in the same directory as this module using an absolute path
 to ensure proper file location in both development and Docker environments.
+
+Authors:
+Aahan Jain - G01522443
+Aditya Samir Vaidya - G01501989
 """
 
 from sqlmodel import SQLModel, create_engine
